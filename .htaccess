@@ -1,7 +1,22 @@
 # GLIT Circle — Apache-Konfiguration fuer united-domains Webspace
 
-# --- Kanonische Adresse: www und http auf https://glitcircle.com ---
+# --- Alte Adressen der Vorgaenger-Website ---
+# Die alte Fassung war ein Onepager je Sprache: /index.html und /de/ auf Deutsch,
+# /en/ auf Englisch, dazu je zwei Rechtsseiten mit .html-Endung. Diese neun
+# Adressen sind indexiert und wuerden ohne Weiterleitung in den 404 laufen.
+# Ziele absolut und mit https, damit aus www oder http nur ein Sprung wird.
 RewriteEngine On
+
+RewriteRule ^de/?$                    https://glitcircle.com/ [R=301,L]
+RewriteRule ^de/index\.html$          https://glitcircle.com/ [R=301,L]
+RewriteRule ^index\.html$             https://glitcircle.com/ [R=301,L]
+RewriteRule ^en/index\.html$          https://glitcircle.com/en/ [R=301,L]
+RewriteRule ^(?:de/)?legal-notice\.html$    https://glitcircle.com/impressum/ [R=301,L]
+RewriteRule ^(?:de/)?privacy-policy\.html$  https://glitcircle.com/datenschutz/ [R=301,L]
+RewriteRule ^en/legal-notice\.html$   https://glitcircle.com/en/legal-notice/ [R=301,L]
+RewriteRule ^en/privacy-policy\.html$ https://glitcircle.com/en/privacy-policy/ [R=301,L]
+
+# --- Kanonische Adresse: www und http auf https://glitcircle.com ---
 RewriteCond %{HTTP_HOST} ^www\.glitcircle\.com$ [NC]
 RewriteRule ^(.*)$ https://glitcircle.com/$1 [R=301,L]
 RewriteCond %{HTTPS} !=on
