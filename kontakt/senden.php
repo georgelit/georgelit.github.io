@@ -32,7 +32,12 @@ const MAX_PRO_STUNDE  = 5;      // je IP
 
 function zurueck(string $status): never
 {
-    $ziel = 'https://glitcircle.com/kontakt/?status=' . rawurlencode($status);
+    // Zurueck auf die Seite, von der das Formular kam. Ohne das landet ein
+    // englischer Besucher ohne JavaScript auf der deutschen Kontaktseite.
+    $erlaubt = ['/kontakt/', '/en/contact/'];
+    $quelle = (string)($_POST['quelle'] ?? '');
+    $pfad = in_array($quelle, $erlaubt, true) ? $quelle : '/kontakt/';
+    $ziel = 'https://glitcircle.com' . $pfad . '?status=' . rawurlencode($status);
     if (($_SERVER['HTTP_ACCEPT'] ?? '') !== '' && str_contains($_SERVER['HTTP_ACCEPT'], 'application/json')) {
         header('Content-Type: application/json; charset=utf-8');
         http_response_code($status === 'ok' ? 200 : 400);
