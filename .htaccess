@@ -17,6 +17,13 @@ RewriteRule ^en/legal-notice\.html$   https://glitcircle.com/en/legal-notice/ [R
 RewriteRule ^en/privacy-policy\.html$ https://glitcircle.com/en/privacy-policy/ [R=301,L]
 
 # --- Kanonische Adresse: www und http auf https://glitcircle.com ---
+# glitcircle.de ist registriert, aber nicht die Adresse der Marke. Sie zeigt
+# auf denselben Webspace und leitet mit Pfad weiter, damit kein zweiter
+# Auftritt mit gleichem Inhalt entsteht. Die Regel steht hinter den Regeln
+# fuer die alten Adressen, damit auch von dort nur ein Sprung noetig ist.
+RewriteCond %{HTTP_HOST} ^(www\.)?glitcircle\.de$ [NC]
+RewriteRule ^(.*)$ https://glitcircle.com/$1 [R=301,L]
+
 RewriteCond %{HTTP_HOST} ^www\.glitcircle\.com$ [NC]
 RewriteRule ^(.*)$ https://glitcircle.com/$1 [R=301,L]
 RewriteCond %{HTTPS} !=on

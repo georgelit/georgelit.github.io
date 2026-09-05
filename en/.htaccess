@@ -1,0 +1,4 @@
+# Englischsprachige Fehlerseite fuer alles unterhalb von /en/.
+# Ohne diese Zeile bekommt ein englischer Besucher die deutsche 404-Seite
+# mit deutscher Navigation. Gilt per Vererbung fuer alle Unterordner.
+ErrorDocument 404 /en/404/index.html
