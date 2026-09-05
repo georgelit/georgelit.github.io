@@ -5,7 +5,18 @@
 # /en/ auf Englisch, dazu je zwei Rechtsseiten mit .html-Endung. Diese neun
 # Adressen sind indexiert und wuerden ohne Weiterleitung in den 404 laufen.
 # Ziele absolut und mit https, damit aus www oder http nur ein Sprung wird.
+
+# Zeichensatz auch im HTTP-Kopf nennen. Ohne Angabe deuten einfache Abrufer
+# text/html regelkonform als ISO-8859-1 und zerlegen jeden Umlaut. Browser
+# lesen die Angabe aus dem Dokument, gescrapte Zulieferpfade nicht.
+AddDefaultCharset UTF-8
+
 RewriteEngine On
+
+# Viele Crawler und Pruefwerkzeuge probieren zuerst den kanonischen Namen
+# /sitemap.xml. Interner Rewrite statt Weiterleitung, damit auch Abrufer ohne
+# Redirect-Verfolgung die Sitemap zu sehen bekommen.
+RewriteRule ^sitemap\.xml$ /sitemap-index.xml [L]
 
 RewriteRule ^de/?$                    https://glitcircle.com/ [R=301,L]
 RewriteRule ^de/index\.html$          https://glitcircle.com/ [R=301,L]
